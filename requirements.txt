@@ -6,4 +6,5 @@
 bs4
 requests
 pandas
+openpyxl
 #
