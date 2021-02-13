@@ -5,6 +5,7 @@
 
 bs4
 requests
-pprint
 pandas
+email
+smtplib
 #
