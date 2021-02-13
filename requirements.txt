@@ -1,0 +1,10 @@
+#
+####### example-requirements.txt #######
+#
+###### Requirements without Version Specifiers ######
+
+bs4
+requests
+pprint
+pandas
+#
