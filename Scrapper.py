@@ -24,7 +24,7 @@ import pandas as pd
 #         URL= 'https://www.monster.com/jobs/search/?q=+'+job_title+'&where=France'
 
         
-pp = pprint.PrettyPrinter(indent=4)
+#pp = pprint.PrettyPrinter(indent=4)
 
 URL = 'https://fr.indeed.com/jobs?q=data+scientist+junior&fromage=1'
 page = requests.get(URL)
