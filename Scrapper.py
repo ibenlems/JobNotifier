@@ -7,7 +7,7 @@ Created on Thu Feb  4 22:45:07 2021
 """
 
 import requests
-import pprint
+#import pprint
 from bs4 import BeautifulSoup
 import pandas as pd 
 #import matplotlib.pyplot as plt 
