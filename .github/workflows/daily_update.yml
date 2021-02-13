@@ -9,11 +9,11 @@ jobs:
    runs-on: ubuntu-latest
 
    steps:
-    - uses: actions/checkout@v2 # checkout the repository content to github runner.
+    - uses: actions/checkout@v3 # checkout the repository content to github runner.
      
     - uses: actions/setup-python@v2
       with:
-       python-version: 3.6 #install the python needed
+       python-version: 3.8 #install the python needed
     - run: |
        python Scrapper.py
       env:
