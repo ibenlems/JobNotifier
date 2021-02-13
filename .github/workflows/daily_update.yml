@@ -18,5 +18,4 @@ jobs:
        python Scrapper.py
       env:
        key: ${{ secrets.key }} # if Scrapper.py requires passwords..etc, set it as secrets
-    - name: export index
-       .... # use crosponding script or actions to help export.
+   
