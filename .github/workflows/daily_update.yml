@@ -24,6 +24,3 @@ jobs:
   
     - run: |
        python Scrapper.py
-      env:
-       key: ${{ secrets.key }} # if Scrapper.py requires passwords..etc, set it as secrets
-   
