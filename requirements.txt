@@ -6,6 +6,4 @@
 bs4
 requests
 pandas
-smtplib
-email
 #
