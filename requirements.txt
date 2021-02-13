@@ -6,5 +6,11 @@
 bs4
 requests
 pandas
+sys
+setuptools
+tokenize
+pkg_resources
+cStringIO
+email
 smtplib
 #
