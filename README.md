@@ -15,5 +15,5 @@ Project is created with:
 * requests
 * email and smtplib libraries 
 * pandas to process and store the data
-* github actions to automate the script to run on shedule
+* github actions to automate the script to run on schedule
 	
