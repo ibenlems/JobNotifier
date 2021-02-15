@@ -13,14 +13,14 @@ This project is a simple web scrapper that gets job offers data frow the web (fo
 ## Technologies
 Project is created with:
 * Python version 3.6
-* beautifulsoup4
-A python librarie to extract data from html and xml files. 
-* requests
-A python HTTP librarie that makes http requests to the web easier 
-* email and smtplib 
-libraries to send an email from python script
-* pandas
- To process and store the data
-* github actions 
+* beautifulsoup4 \
+A python librarie to extract data from html and xml files. \
+* requests \
+A python HTTP librarie that makes http requests to the web easier \
+* email and smtplib \
+libraries to send an email from python script \
+* pandas \
+ To process and store the data \
+* github actions  \
 To automate the script to run on schedule (every day around 8 pm)
 	
