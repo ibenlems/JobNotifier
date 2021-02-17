@@ -113,9 +113,9 @@ import smtplib
 
 # create message object instance
 msg = MIMEMultipart()
-password = "job123456a"
+password = str(key)
 msg['From'] = "jobnotifier49@gmail.com"
-msg['To'] = "ismailbenlemsieh@gmail.com"
+msg['To'] = str(send_to)
 msg['Subject'] = "Today scrapped job offers"
 server = smtplib.SMTP('smtp.gmail.com', 587)
 server.starttls()
