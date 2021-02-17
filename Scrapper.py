@@ -9,7 +9,8 @@ Created on Thu Feb  4 22:45:07 2021
 import requests
 #import pprint
 from bs4 import BeautifulSoup
-import pandas as pd 
+import pandas as pd
+import os 
 #import matplotlib.pyplot as plt 
 #import numpy as np 
 
@@ -113,9 +114,9 @@ import smtplib
 
 # create message object instance
 msg = MIMEMultipart()
-password = str(key)
+password = str(os.environ.get('key'))
 msg['From'] = "jobnotifier49@gmail.com"
-msg['To'] = str(send_to)
+msg['To'] = str(os.environ.get('send_to'))
 msg['Subject'] = "Today scrapped job offers"
 server = smtplib.SMTP('smtp.gmail.com', 587)
 server.starttls()
