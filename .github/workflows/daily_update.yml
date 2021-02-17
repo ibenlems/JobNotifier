@@ -2,8 +2,8 @@ name: update
 
 on:
  schedule:
- - cron: "*/5 * * * *"
- #- cron: "0 20 * * *"
+ #- cron: "*/5 * * * *"
+ - cron: "0 20 * * *"
 
 jobs:
   build:
