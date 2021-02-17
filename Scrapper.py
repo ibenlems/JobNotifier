@@ -7,90 +7,84 @@ Created on Thu Feb  4 22:45:07 2021
 """
 
 import requests
-#import pprint
 from bs4 import BeautifulSoup
 import pandas as pd
 import os 
-#import matplotlib.pyplot as plt 
-#import numpy as np 
 
-# def scrab_jobs(job_title,location=None):
-#     """scrab jobs in the desired location
-#     param: job_title : string the job title 
-#     location : string the location where to search"""
 
-#     if location:
-#         URL= 'https://www.monster.com/jobs/search/?q=+'+job_title+'&where='+location
-#     else :
-#         URL= 'https://www.monster.com/jobs/search/?q=+'+job_title+'&where=France'
 
+
+
+def scrap_page(page_URL):
+    
+    page = requests.get(page_URL)
+
+    soup = BeautifulSoup(page.content, 'html.parser')
+    results = soup.find(id='resultsCol')
+
+    job_elems = results.find_all('div', class_='jobsearch-SerpJobCard')
+
+    
+   
+    for job_elem in job_elems:
+    
+        # Each job_elem is a new BeautifulSoup object.
+    
+        title_elem = job_elem.find('h2', class_='title')
+    
+        company_elem = job_elem.find('span', class_='company')
+    
+        location_elem = job_elem.find('span', class_='location')
+    
+        summary_elem = job_elem.find('div',class_='summary')
+    
+        link = "https://fr.indeed.com"+job_elem.find("a")["href"]
+ 
         
-#pp = pprint.PrettyPrinter(indent=4)
+    
+        if None in (title_elem, company_elem,summary_elem, location_elem):
+            continue
 
+    
+        title_elems.append(title_elem.text.strip())
+    
+        company_elems.append(company_elem.text.strip())
+    
+        location_elems.append(location_elem.text.strip())
+    
+        summary_elems.append(summary_elem.text.strip())
+    
+        links.append(link)
+    
+        
 URL = 'https://fr.indeed.com/jobs?q=data+scientist+junior&fromage=1'
 page = requests.get(URL)
 
-#pp.pprint(page.content)
 
 soup = BeautifulSoup(page.content, 'html.parser')
 
-results = soup.find(id='resultsCol')
-#pp.pprint(results)
+#get the number of pages
+list_pages = soup.find('ul',class_='pagination-list')
+pages=list_pages.findAll('li') 
+number_pages=len(list)-1
 
-job_elems = results.find_all('div', class_='jobsearch-SerpJobCard')
 
-#for job in job_elems:
-
-    #print(job,end='\n'*2)
-   
-
+#prepare list where to store data 
 title_elems=[]
 company_elems=[]
 location_elems=[]
 summary_elems=[]
 links=[]
-   
-for job_elem in job_elems:
-    
-    # Each job_elem is a new BeautifulSoup object.
-    
-    title_elem = job_elem.find('h2', class_='title')
-    
-    company_elem = job_elem.find('span', class_='company')
-    
-    location_elem = job_elem.find('span', class_='location')
-    
-    summary_elem = job_elem.find('div',class_='summary')
-    
-    link = job_elem.find("a")["href"]
-    link="https://fr.indeed.com"+link
-        
-    
-    if None in (title_elem, company_elem, location_elem):
-        continue
 
-    # print(title_elem.text.strip())
-    # print(company_elem.text.strip())
-    
-    # print(location_elem.text.strip())
-    # print(summary_elem.text.strip())
-    # #print(link.text.strip())
-    # print(f"Apply here: {link}\n")
-    
-    
-    
-    #print()
-    
-    title_elems.append(title_elem.text.strip())
-    
-    company_elems.append(company_elem.text.strip())
-    
-    location_elems.append(location_elem.text.strip())
-    
-    summary_elems.append(summary_elem.text.strip())
-    
-    links.append(link)
-    
+#scrap data from the first page 
+scrap_page(URL)
+
+#iterate to scrap other pages of the same website
+for num in range(1,number_pages-2):
+    page_url= 'https://fr.indeed.com/jobs?q=data+scientist+junior&fromage=1&start='+str(num*10)
+    scrap_page(page_url)
+        
+#store data in a pandas dataframe
 jobs=pd.DataFrame(
     { 'title': title_elems,
       'company': company_elems,
@@ -114,6 +108,8 @@ import smtplib
 
 # create message object instance
 msg = MIMEMultipart()
+ 
+#use environment variables to hide password
 password = str(os.environ.get('key'))
 msg['From'] = "jobnotifier49@gmail.com"
 msg['To'] = str(os.environ.get('send_to'))
@@ -135,6 +131,7 @@ part.set_payload((attachment).read())
 email.encoders.encode_base64(part)
 part.add_header('Content-Disposition',"attachment; filename=%s" % "jobs.xlsx")
 
+#send the email
 msg.attach(part)
 text = msg.as_string()
 server.sendmail(msg['From'], msg['To'], text)
