@@ -19,9 +19,10 @@ jobs:
     - name: Install requirements
       run: |
        pip install -r requirements.txt 
-      env:
-       key: ${{ secrets.GMAIL_PASSWORD }}
-       send_to: ismailbenlemsieh@gmail.com 
+    
   
     - run: |
        python Scrapper.py
+      env:
+       key: ${{ secrets.GMAIL_PASSWORD }}
+       send_to: ismailbenlemsieh@gmail.com 
