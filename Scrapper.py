@@ -14,6 +14,13 @@ import os
 
 
 
+#prepare list where to store data 
+title_elems=[]
+company_elems=[]
+location_elems=[]
+summary_elems=[]
+links=[]
+
 
 def scrap_page(page_URL):
     
@@ -69,12 +76,6 @@ pages=list_pages.findAll('li')
 number_pages=len(list)-1
 
 
-#prepare list where to store data 
-title_elems=[]
-company_elems=[]
-location_elems=[]
-summary_elems=[]
-links=[]
 
 #scrap data from the first page 
 scrap_page(URL)
