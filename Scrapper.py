@@ -73,7 +73,7 @@ soup = BeautifulSoup(page.content, 'html.parser')
 #get the number of pages
 list_pages = soup.find('ul',class_='pagination-list')
 pages=list_pages.findAll('li') 
-number_pages=len(list)-1
+number_pages=len(pages)-1
 
 
 
