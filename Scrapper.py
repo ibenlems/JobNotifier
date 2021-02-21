@@ -16,6 +16,13 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import os
 
+#prepare list where to store data 
+title_elems=[]
+company_elems=[]
+location_elems=[]
+summary_elems=[]
+links=[]
+
 
 def scrap_page(page_URL):
 
@@ -60,6 +67,13 @@ page = requests.get(URL)
 
 soup = BeautifulSoup(page.content, 'html.parser')
 
+<<<<<<< HEAD
+=======
+#get the number of pages
+list_pages = soup.find('ul',class_='pagination-list')
+pages=list_pages.findAll('li') 
+number_pages=len(pages)-1
+>>>>>>> f264aa0171297669e20b988892f108cfa8b01aae
 
 # prepare list where to store data
 title_elems = []
@@ -68,7 +82,12 @@ location_elems = []
 summary_elems = []
 links = []
 
+<<<<<<< HEAD
 # scrap data from the first page
+=======
+
+#scrap data from the first page 
+>>>>>>> f264aa0171297669e20b988892f108cfa8b01aae
 scrap_page(URL)
 
 # a try excpet bloc because first page could not include the pagination-list if there is only one page
