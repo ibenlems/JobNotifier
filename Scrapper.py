@@ -68,12 +68,7 @@ page = requests.get(URL)
 soup = BeautifulSoup(page.content, 'html.parser')
 
 
-# prepare list where to store data
-title_elems = []
-company_elems = []
-location_elems = []
-summary_elems = []
-links = []
+
 
 # scrap data from the first page
 scrap_page(URL)
